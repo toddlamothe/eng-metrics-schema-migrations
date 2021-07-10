@@ -19,7 +19,9 @@ depends_on = None
 def upgrade():
     op.create_table(
         'epic',
-        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('uuid', sa.BINARY(16), primary_key=True),
+        op.add_column('epic', sa.Column('uuid', sa.BINARY(16)))
+        sa.Column('epic_id', sa.Integer, nullable=False),
         sa.Column('key', sa.VARCHAR(length=15), nullable=False),        
         sa.Column('name', sa.VARCHAR(length=100), nullable=False),        
         sa.Column('epic_count', sa.Integer, nullable=False),        
@@ -33,7 +35,8 @@ def upgrade():
         sa.Column('issues_in_progress', sa.Integer, nullable=False),
         sa.Column('issues_to_do', sa.Integer, nullable=False),
         sa.Column('issues_unestimated', sa.Integer, nullable=False),
-        sa.Column('issues_percent_complete', sa.Float, nullable=False)        
+        sa.Column('issues_percent_complete', sa.Float, nullable=False),
+        sa.Column('created_dttm', sa.DateTime, nullable=False)
     )
 
 
