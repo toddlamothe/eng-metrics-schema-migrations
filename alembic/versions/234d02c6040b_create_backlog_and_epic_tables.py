@@ -20,7 +20,7 @@ def upgrade():
 
     op.create_table(
         'backlog',
-        sa.Column('uuid', sa.BINARY(16), primary_key=True),
+        sa.Column('uuid', sa.VARCHAR(255), primary_key=True),
         sa.Column('backlog_id', sa.Integer, nullable=False),
         sa.Column('name', sa.VARCHAR(length=100), nullable=False),        
         sa.Column('epic_count', sa.Integer, nullable=False),        
@@ -40,7 +40,8 @@ def upgrade():
 
     op.create_table(
         'epic',
-        sa.Column('uuid', sa.BINARY(16), primary_key=True),
+        sa.Column('uuid', sa.VARCHAR(255), primary_key=True),
+        sa.Column('backlog_uuid', sa.VARCHAR(255), nullable=False),
         sa.Column('epic_id', sa.Integer, nullable=False),        
         sa.Column('key', sa.VARCHAR(length=15), nullable=False),        
         sa.Column('name', sa.VARCHAR(length=100), nullable=False),        
